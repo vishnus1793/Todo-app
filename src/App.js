@@ -10,7 +10,7 @@ function App() {
   };
 
   const handleAddTodo = () => {
-    if (inputValue) {
+    if (inputValue.trim()) {
       setTodos([...todos, inputValue]);
       setInputValue('');
     }
@@ -21,6 +21,13 @@ function App() {
     setTodos(newTodos);
   };
 
+  // Handle pressing "Enter" to add a new todo
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleAddTodo();
+    }
+  };
+
   return (
     <div className="App">
       <h1>To-Do List</h1>
@@ -28,6 +35,7 @@ function App() {
         type="text" 
         value={inputValue} 
         onChange={handleInputChange} 
+        onKeyPress={handleKeyPress}  // Add key press event listener
         placeholder="Add a new task..." 
       />
       <button onClick={handleAddTodo}>Add</button>
